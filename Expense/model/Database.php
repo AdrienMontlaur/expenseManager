@@ -1,21 +1,14 @@
 <?php
 
-    $db = new PDO('mysql:host=localhost;dbname=expense;charset=utf8', "root", "");
-
-
-Class Database
+abstract class Database
 {
+    protected $db;
+    protected $identifiant = 'root';
+    protected $mdp = '';
 
-
-        function insert($siret,$nom)
-        {
-            $db = new PDO('mysql:host=localhost;dbname=expense;charset=utf8', "root", "");
-            $sql = "INSERT INTO entreprise(SIRET, nom_entreprise) 
-                VALUES('$siret','$nom')";
-
-            $db->query($sql);
-        }
-
-
-
+    public function __construct()
+    {
+        $this->db = new PDO('mysql:host=localhost;dbname=expense;charset=utf8',"root","");
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
 }

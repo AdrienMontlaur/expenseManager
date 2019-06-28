@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: x_sal
- * Date: 06/06/2019
- * Time: 13:41
- */
 
 class Formulaire
 {

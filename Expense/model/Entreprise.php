@@ -1,40 +1,67 @@
 <?php
 
-require_once("Database.php");
-$db = new PDO('mysql:host=localhost;dbname=expense;charset=utf8', "root", "");
+
 Class Entreprise
 {
 
 
-	private $_siret;
-	private $_nom;
+	private $entSiret;
+	private $entNom;
+	private $entAdresse;
+	private $entPostal;
+	private $entVille;
 
-	public function setSiret($numeroSiret){
-		if (strlen($numeroSiret)>1){
-			$this->_siret=$numeroSiret;
+	public function setEntSiret($numeroSiret){
+		if (strlen($numeroSiret)==14&&(int)$numeroSiret){
+			$this->entSiret=$numeroSiret;
 		}
 	}
-	public function setNom($nomSociete){
+	public function setEntNom($nomSociete){
 		if (is_string($nomSociete)){
-			$this->_nom=$nomSociete;
+		    if (iconv_strlen($nomSociete)>50) {
+                $nomSociete = substr($nomSociete,0,50);
+            }
+            $this->entNom = strtoupper($nomSociete);
 		}
 	}
-	public function getSiret(){
-		return $this->_siret;
-	}
-	public function getNom(){
-		return $this->_nom;
-	}
+    public function setEntAdresse($adresse){
+        if (is_string($adresse)){
+            if (iconv_strlen($adresse)>50) {
+                $adresse = substr($adresse,0,50);
+            }
+            $this->entAdresse = strtoupper($adresse);
+        }
+    }
 
-	public function connectDB($identifiant='root',$mdp=''){
+    public function setEntPostal($codePostal){
+        if (strlen($codePostal)==5&&(int)$codePostal){
+            $this->entPostal=$codePostal;
+        }
+    }
 
-		try {
-		    $db = new PDO('mysql:host=localhost;dbname=expense;charset=utf8', "$identifiant", "$mdp");
-		    return $db;
-		}
+    public function setEntVille($ville){
+        if (is_string($ville)){
+            if (iconv_strlen($ville)>50) {
+                $ville = substr($ville,0,50);
+            }
+            $this->entVille = strtoupper($ville);
+        }
+    }
 
-		catch(Exception $e) {
-		    die('Erreur : '.$e->getMessage());
-		}
+	public function getEntSiret(){
+		return $this->entSiret;
 	}
+	public function getEntNom(){
+		return $this->entNom;
+	}
+    public function getEntAdresse(){
+        return $this->entAdresse;
+    }
+
+    public function getEntPostal(){
+        return $this->entPostal;
+    }
+    public function getEntVille(){
+        return $this->entVille;
+    }
 }
