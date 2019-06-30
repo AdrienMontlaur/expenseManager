@@ -10,7 +10,7 @@ class Formulaire
     }
 
     public function input($type,$nom,$placeholder=null,$value=null){
-        $typeAutorise=['text','email'];
+        $typeAutorise=['text','email','password'];
         if (in_array($type, $typeAutorise)){
             $this->html.="<input type='$type' name='$nom' placeholder='$placeholder' value='$value'>";
         }

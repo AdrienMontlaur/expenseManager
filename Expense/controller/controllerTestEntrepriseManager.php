@@ -1,7 +1,7 @@
 <?php
 
 //ecriture des controleurs
-
+session_start();
 require_once('../functions.php');
 
 
@@ -18,13 +18,15 @@ echo $texte1->render();
 if (isset($_POST['envoyer'])){
 
     $entreprise= new Entreprise();
-    $entreprise->setEntSiret($_POST['entSiret']);
-    $entreprise->setEntNom($_POST['entNom']);
-    $entreprise->setEntAdresse($_POST['entAdresse']);
-    $entreprise->setEntPostal($_POST['entPostal']);
-    $entreprise->setEntVille($_POST['entVille']);
+    $entreprise->setEntSiret(filter_input(INPUT_POST,'entSiret',FILTER_SANITIZE_NUMBER_INT));
+    $entreprise->setEntNom(filter_input(INPUT_POST,'entNom',FILTER_SANITIZE_STRING));
+    $entreprise->setEntAdresse(filter_input(INPUT_POST,'entAdresse',FILTER_SANITIZE_STRING));
+    $entreprise->setEntPostal(filter_input(INPUT_POST,'entPostal',FILTER_SANITIZE_NUMBER_INT));
+    $entreprise->setEntVille(filter_input(INPUT_POST,'entVille',FILTER_SANITIZE_STRING));
 
     $manageEntreprise=new EntrepriseManager();
     $manageEntreprise->create($entreprise);
 
 }
+
+

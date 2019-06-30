@@ -7,7 +7,7 @@ class EntrepriseManager extends Database
         $sql="INSERT INTO entreprise (entSiret, entNom, entAdresse, entPostal, entVille) 
         VALUES (:entSiret, :entNom, :entAdresse, :entPostal, :entVille)";
         $req=$this->db->prepare($sql);
-        $req->bindValue(':entSiret',$entreprise->getEntSiret(),PDO::PARAM_INT);
+        $req->bindValue(':entSiret',$entreprise->getEntSiret(),PDO::PARAM_STR);
         $req->bindValue(':entNom',$entreprise->getEntNom(),PDO::PARAM_STR);
         $req->bindValue(':entAdresse',$entreprise->getEntAdresse(),PDO::PARAM_STR);
         $req->bindValue(':entPostal',$entreprise->getEntPostal(),PDO::PARAM_INT);

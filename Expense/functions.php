@@ -1,5 +1,10 @@
 <?php
 
+/**
+* 
+* @param str $className Classe appelé
+*/  
+
 function __autoload($className){
     $classDir = '../model/'.$className.'.php';
     if(file_exists($classDir)){
