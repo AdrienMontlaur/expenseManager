@@ -7,12 +7,22 @@ and open the template in the editor.
     Created on : 30 juin 2019, 11:31:51
     Author     : Adrien M
 */
-*{
+body{
     background-color: blue;
 }
 .container{
-    margin: auto;
     display: flex;
-    
+    flex-direction: column;
+    margin-top: 30vh;
+    text-align: center;
+    color:white;
 }
 
+.formulaire input{
+    background-color: white;
+    display: flex;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}

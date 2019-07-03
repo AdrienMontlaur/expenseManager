@@ -6,14 +6,14 @@ Class Entreprise
 
         /**
          *
-         * @param int $entSiret
-         * @param int $entSiret
-         * @param int $entSiret
-         * @param int $entSiret
-         * @param int $entSiret
+         * @param int $ententSiret
+         * @param int $ententSiret
+         * @param int $ententSiret
+         * @param int $ententSiret
+         * @param int $ententSiret
          * 
          */
-	private $entSiret;
+	private $ententSiret;
 	private $entNom;
 	private $entAdresse;
 	private $entPostal;
@@ -21,12 +21,12 @@ Class Entreprise
 
         /**
          * 
-         * @param int $numeroSiret Numero siret de l'entreprise à instancier
+         * @param int $numeroentSiret Numero entSiret de l'entreprise à instancier
          */
         
-	public function setEntSiret($numeroSiret){
-		if (strlen($numeroSiret)==14&&(int)$numeroSiret){
-			$this->entSiret=$numeroSiret;
+	public function setEntentSiret($numeroentSiret){
+		if (strlen($numeroentSiret)==14&&(int)$numeroentSiret){
+			$this->ententSiret=$numeroentSiret;
 		}
 	}
         /**
@@ -76,10 +76,10 @@ Class Entreprise
     }
         /**
          * 
-         * @return str $entSiret Retourne le siret de l'objet entreprise
+         * @return str $ententSiret Retourne le entSiret de l'objet entreprise
          */
-    public function getEntSiret(){
-            return $this->entSiret;
+    public function getEntentSiret(){
+            return $this->ententSiret;
     }
         /**
          * 
