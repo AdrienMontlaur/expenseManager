@@ -1,8 +1,9 @@
 <?php
 
 /**
-* 
-* @param str $className Classe appelé
+* Function to autoload class by names
+*
+* @param str $className Call of class
 */  
 
 function __autoload($className){

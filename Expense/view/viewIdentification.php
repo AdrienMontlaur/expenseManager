@@ -1,5 +1,7 @@
 <?php $title='Identification'?>
-<?php ob_start(); ?>
+<?php 
+//native function to save content on buffer
+ob_start(); ?>
 
 <div class="col-xs-4 container">
     <h1>Expense Manager</h1>
@@ -9,6 +11,8 @@
     </div>
 </div>
 
-<?php $content = ob_get_clean(); ?>
+<?php 
+//native function affect the content to the buffer and clean it
+$content = ob_get_clean(); ?>
 
 <?php require_once('templateIdentification.php'); ?>

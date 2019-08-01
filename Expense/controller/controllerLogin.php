@@ -1,5 +1,5 @@
 <?php
-
+//Session start for user record
 session_start();
 require_once('../functions.php');
 
@@ -23,11 +23,11 @@ foreach ($listeLogin as $value){
                 header('location:../controller/controllerTestEntrepriseManager.php');
             }
             else{
-                echo 'Mot de passe incorrect';
+                echo 'Erreur d\'identification';
             }
         }
         else{
-            echo 'Adresse salMail non reconnue';
+            echo 'Erreur d\'identification';
         }
     }
 }
