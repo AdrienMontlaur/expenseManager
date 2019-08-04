@@ -20,7 +20,7 @@ class Formulaire
     }
 
     public function select($nom,$tbl,$selected = null){
-        $this->html.="<select name='$nom'>";
+        $this->html.="<select name='$nom'><option disabled selected>Select your option</option>";
         foreach ($tbl as $index => $element){
             if ($index == $selected){
                 $this->html.="<option value='$index' selected>$element</option>";

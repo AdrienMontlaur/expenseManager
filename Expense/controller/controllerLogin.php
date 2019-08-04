@@ -20,7 +20,7 @@ foreach ($listeLogin as $value){
                 //$_SESSION['login']=$_POST['login'];
                 $_SESSION['id']=$value->getSalId();
                 echo 'bonjour M'.$_SESSION['login'];
-                header('location:../controller/controllerTestEntrepriseManager.php');
+                header('location:../view/viewGestionCommerciaux.php');
             }
             else{
                 echo 'Erreur d\'identification';

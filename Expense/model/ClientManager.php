@@ -1,57 +1,81 @@
 <?php
 
-// TODO TOUT!
-class EntrepriseManager extends Database
+class ClientManager extends Database
 {
-    public function create(Entreprise $entreprise){
-        $sql="INSERT INTO entreprise (ententSiret, entNom, entAdresse, entPostal, entVille) 
-        VALUES (:ententSiret, :entNom, :entAdresse, :entPostal, :entVille)";
+    public function create(Client $client){
+        $sql="INSERT INTO client (cliNom, cliPrenom, cliFonction, cliMail,cliNumeroTelephone, entSiret, cliCommentaire) 
+        VALUES (:cliNom, :cliPrenom, :cliFonction, :cliMail, :cliNumeroTelephone, :entSiret, :cliCommentaire)";
         $req=$this->db->prepare($sql);
-        $req->bindValue(':ententSiret',$entreprise->getEntentSiret(),PDO::PARAM_STR);
-        $req->bindValue(':entNom',$entreprise->getEntNom(),PDO::PARAM_STR);
-        $req->bindValue(':entAdresse',$entreprise->getEntAdresse(),PDO::PARAM_STR);
-        $req->bindValue(':entPostal',$entreprise->getEntPostal(),PDO::PARAM_INT);
-        $req->bindValue(':entVille',$entreprise->getEntVille(),PDO::PARAM_STR);
+        //$req->bindValue(':cliId',$client->getCliId(),PDO::PARAM_INT);
+        $req->bindValue(':cliNom',$client->getCliNom(),PDO::PARAM_STR);
+        $req->bindValue(':cliPrenom',$client->getCliPrenom(),PDO::PARAM_STR);
+        $req->bindValue(':cliFonction',$client->getCliFonction(),PDO::PARAM_STR);
+        $req->bindValue(':cliMail',$client->getCliMail(),PDO::PARAM_STR);
+        $req->bindValue(':cliNumeroTelephone',$client->getCliNumeroTelephone(),PDO::PARAM_STR);
+        $req->bindValue(':entSiret',$client->getEntSiret(),PDO::PARAM_INT);
+        //$req->bindValue(':salId',$client->getSalId(),PDO::PARAM_INT);
+        $req->bindValue(':cliCommentaire',$client->getCliCommentaire(),PDO::PARAM_STR);
         $req->execute();
     }
-    public function update(Entreprise $entreprise){
-        $sql = "UPDATE entreprise SET ententSiret = :ententSiret,
-                                      entNom = :entNom,
-                                      entAdresse = :entAdresse,
-                                      entPostal = :entPostal,
-                                      entVille = :entVille
-
-            WHERE ententSiret = :ententSiret
-                                    ";
+    public function update(Client $client){
+        $sql = "UPDATE client SET cliId = :cliId,
+                                      cliNom = :cliNom,
+                                      cliPrenom = :cliPrenom,
+                                      cliFonction = :cliFonction,
+                                      cliMail = :cliMail,
+                                      cliNumeroTelephone = :cliNumeroTelephone,
+                                      entSiret = :entSiret,
+                                      salId = :salId,
+                                      cliCommentaire=:cliCommentaire
+            WHERE cliId = :cliId";
         $req = $this->db->prepare($sql);
-        $req->bindValue(':ententSiret',$entreprise->getEntentSiret(),PDO::PARAM_INT);
-        $req->bindValue(':entNom',$entreprise->getEntNom(),PDO::PARAM_STR);
-        $req->bindValue(':entAdresse',$entreprise->getEntAdresse(),PDO::PARAM_STR);
-        $req->bindValue(':entPostal',$entreprise->getEntPostal(),PDO::PARAM_INT);
-        $req->bindValue(':entVille',$entreprise->getEntVille(),PDO::PARAM_STR);
+        $req->bindValue(':cliId',$client->getCliId(),PDO::PARAM_INT);
+        $req->bindValue(':cliNom',$client->getCliNom(),PDO::PARAM_STR);
+        $req->bindValue(':cliPrenom',$client->getCliPrenom(),PDO::PARAM_STR);
+        $req->bindValue(':cliFonction',$client->getCliFonction(),PDO::PARAM_STR);
+        $req->bindValue(':cliMail',$client->getCliMail(),PDO::PARAM_STR);
+        $req->bindValue(':cliNumeroTelephone',$client->getCliNumeroTelephone(),PDO::PARAM_STR);
+        $req->bindValue(':entSiret',$client->getEntSiret(),PDO::PARAM_INT);
+        $req->bindValue(':salId',$client->getSalId(),PDO::PARAM_INT);
+        $req->bindValue(':cliCommentaire',$client->getCliCommentaire(),PDO::PARAM_STR);
         $req->execute();
     }
 
 
-    public function delete(Entreprise $entreprise){
+    public function delete(Client $client){
 
-        $sql = "DELETE FROM entreprise 
-                WHERE ententSiret = :ententSiret
-                                        ";
+        $sql = "DELETE FROM client 
+                WHERE cliId = :cliId";
         $req = $this->db->prepare($sql);
-        $req->bindValue(':ententSiret',$entreprise->getEntentSiret(),PDO::PARAM_INT);
+        $req->bindValue(':cliId',$client->getCliId(),PDO::PARAM_INT);
         $req->execute();
-        unset($entreprise);
+        unset($client);
     }
 
-    public function read(int $entSiret){
-        $sql = "SELECT * FROM entreprise WHERE ententSiret = :ententSiret";
+    public function read(int $cliId){
+        $sql = "SELECT * FROM client WHERE cliId = :cliId";
         $req = $this->db->prepare($sql);
-        $req->bindValue(':ententSiret', $entSiret, PDO::PARAM_INT);
+        $req->bindValue(':cliId', $cliId, PDO::PARAM_INT);
         $req->execute();
         $values = $req->fetch(PDO::FETCH_ASSOC);
-        return New Entreprise($values);
+        return New Client($values);
     }
 
+
+    public function readAll(){
+        
+        $clients = [];
+
+        $sql = "SELECT * FROM client";
+        $results = $this->db->query($sql);
+        $clientsData = $results->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($clientsData as $clientData){
+            $clients[] = new Entreprise($clientData);
+        }
+
+        return $clients;
+
+    }
 
 }

@@ -1,32 +1,39 @@
 <?php
 
 
-Class Entreprise
+Class Entreprise extends Entity
 {
 
         /**
          *
-         * @param int $ententSiret
-         * @param int $ententSiret
-         * @param int $ententSiret
-         * @param int $ententSiret
-         * @param int $ententSiret
+         * @param int $entSiret
+         * @param int $entSiret
+         * @param int $entSiret
+         * @param int $entSiret
+         * @param int $entSiret
          * 
          */
-	private $ententSiret;
+	private $entSiret;
 	private $entNom;
 	private $entAdresse;
 	private $entPostal;
 	private $entVille;
 
+
+
+    public function __construct($array=null){
+        if(is_array($array)){
+            $this->hydrate($array);
+        }
+    }
         /**
          * 
          * @param int $numeroentSiret Numero entSiret de l'entreprise à instancier
          */
         
-	public function setEntentSiret($numeroentSiret){
+	public function setEntSiret($numeroentSiret){
 		if (strlen($numeroentSiret)==14&&(int)$numeroentSiret){
-			$this->ententSiret=$numeroentSiret;
+			$this->entSiret=$numeroentSiret;
 		}
 	}
         /**
@@ -76,10 +83,10 @@ Class Entreprise
     }
         /**
          * 
-         * @return str $ententSiret Retourne le entSiret de l'objet entreprise
+         * @return str $entSiret Retourne le entSiret de l'objet entreprise
          */
-    public function getEntentSiret(){
-            return $this->ententSiret;
+    public function getEntSiret(){
+            return $this->entSiret;
     }
         /**
          * 
