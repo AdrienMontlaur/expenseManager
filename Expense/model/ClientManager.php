@@ -71,7 +71,7 @@ class ClientManager extends Database
         $clientsData = $results->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($clientsData as $clientData){
-            $clients[] = new Entreprise($clientData);
+            $clients[] = new Client($clientData);
         }
 
         return $clients;
