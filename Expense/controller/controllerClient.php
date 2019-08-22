@@ -81,21 +81,21 @@ function adaptClientsToArray($clients,$entreprises,$modif=false,$supp=false)
 
 //List clients
 
-if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="http://localhost/ExpenseGit/expenseManager/Expense/view/viewGestionClient.php"){
+if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"."view/viewGestionClient.php"){
 
     $clients=$manageClient->readAll();
     $tableauObjetClientsAdapt=adaptClientsToArray($clients,$entreprises);
     echo (afficheTableau($tableauObjetClientsAdapt));
 }
 //Add client menu
-if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="http://localhost/ExpenseGit/expenseManager/Expense/view/viewAjoutClient.php"){
+if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"."view/viewAjoutClient.php"){
 
     $entreprisesNom=getTableEntreprise($entreprises);
 
     $formAjoutClient= new Formulaire('','POST');
     $formAjoutClient->select('entSiret',$entreprisesNom);
     echo "Si l'entreprise n'est pas connue:";
-    echo '<a href="viewAjoutEntreprise">Ajouter une entreprise</a>';
+    echo '<a href="viewAjoutEntreprise.php">Ajouter une entreprise</a>';
     $formAjoutClient->input('text','cliNom','Nom du contact chez le client');
     $formAjoutClient->input('text','cliPrenom','Prenom du contact chez le client');
     $formAjoutClient->input('text','cliFonction','Fonction du contact chez le client');
@@ -126,7 +126,7 @@ if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="http://loc
 
 //Update client menu
 
-if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="http://localhost/ExpenseGit/expenseManager/Expense/view/viewModifierClient.php"){
+if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"."view/viewModifierClient.php"){
 
     $clients=$manageClient->readAll();
     $tableauObjetClientsAdapt=adaptClientsToArray($clients,$entreprises,true);
@@ -165,11 +165,11 @@ if (isset($_GET['idClientModif'])){
         $client->setEntSiret($_POST['entSiret']);
     
         $manageClient->update($client);
-        header('location:http://localhost/ExpenseGit/expenseManager/Expense/view/viewGestionClient.php');
+        header('location:'."$wampPath"."view/viewGestionClient.php");
     }
     echo $_SESSION['id'];
 }
-if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="http://localhost/ExpenseGit/expenseManager/Expense/view/viewSupprimerClient.php"){
+if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"."view/viewSupprimerClient.php"){
 
     $clients=$manageClient->readAll();
     $tableauObjetClientsAdapt=adaptClientsToArray($clients,$entreprises,false,true);
@@ -179,5 +179,5 @@ if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="http://loc
 if (isset($_GET['idClientSupp'])){
     $client=$manageClient->read($_GET['idClientSupp']);
     $manageClient->delete($client);
-    header('location:http://localhost/ExpenseGit/expenseManager/Expense/view/viewGestionClient.php');
+    header('location:'."$wampPath"."view/viewGestionClient.php");
 }

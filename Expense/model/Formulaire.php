@@ -10,7 +10,7 @@ class Formulaire
     }
 
     public function input($type,$nom,$placeholder=null,$value=null){
-        $typeAutorise=['text','esalMail','password'];
+        $typeAutorise=['text','esalMail','password','date'];
         if (in_array($type, $typeAutorise)){
             $this->html.="<input type='$type' name='$nom' placeholder='$placeholder' value='$value'>";
         }
@@ -19,8 +19,8 @@ class Formulaire
         }
     }
 
-    public function select($nom,$tbl,$selected = null){
-        $this->html.="<select name='$nom'><option disabled selected>Select your option</option>";
+    public function select($nom,$tbl,$selected = null,$placeholder){
+        $this->html.="<select name='$nom'><option disabled selected>$placeholder</option>";
         foreach ($tbl as $index => $element){
             if ($index == $selected){
                 $this->html.="<option value='$index' selected>$element</option>";
@@ -51,6 +51,10 @@ class Formulaire
             $this->html.="<label><input type='checkbox' name='$nom' value='$value'>$label</label>";
         }
 
+    }
+
+    public function label($for, $value){
+        $this->html.="<label for='$for'>$value</label>";
     }
 
     public function submit($nom, $value){

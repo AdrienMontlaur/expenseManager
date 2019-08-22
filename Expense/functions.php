@@ -14,6 +14,8 @@ function __autoload($className){
         echo "le fichier $classDir n'existe pas";
     }
 }
+//path on personal wamp
+$wampPath="http://localhost/expense/expenseManager/Expense/";
 
 function afficheTableau($data){
     // Ouverture du tableau html et entete

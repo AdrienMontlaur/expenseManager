@@ -2,7 +2,7 @@
 
 require_once('../functions.php');
 
-class Salarie
+class Salarie extends Entity
 {
 
     private $salFonction;
@@ -11,8 +11,13 @@ class Salarie
     private $salMdp;
     private $salNom;
     private $salPrenom;
-    private $salentSiret;
+    private $salEntSiret;
 
+    public function __construct($array=null){
+        if(is_array($array)){
+            $this->hydrate($array);
+        }
+    }
     /**
      * @return mixed
      */
@@ -43,9 +48,7 @@ class Salarie
      */
     public function setSalId($salId)
     {
-        if (is_int($salId)) {
             $this->salId = intval($salId);
-        }
     }
 
     /**
@@ -61,7 +64,7 @@ class Salarie
      */
     public function setSalMail($salMail)
     {
-        if ( preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ " , $salMail ))
+        if (preg_match("/^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ ", $salMail))
         {
             $this->salMail = $salMail;
         }
@@ -128,19 +131,19 @@ class Salarie
     /**
      * @return mixed
      */
-    public function getSalentSiret()
+    public function getSalEntSiret()
     {
 
-        return $this->salentSiret;
+        return $this->salEntSiret;
     }
 
     /**
      * @param mixed $salentSiret
      */
-    public function setSalentSiret($salentSiret)
+    public function setSalEntSiret($salEntSiret)
     {
-        if (strlen($salentSiret)==14&&(int)$salentSiret){
-            $this->salentSiret=$salentSiret;
+        if (strlen($salEntSiret)===14){
+            $this->salEntSiret=$salEntSiret;
         }
 
     }
