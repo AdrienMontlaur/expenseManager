@@ -79,16 +79,15 @@ class FraisManager extends Database
 
     }
     public function validateManager(Frais $frais){
-        $sql = "UPDATE frais SET      fraStatut=:fraStatus
-                                      fraRemboursement=:fraRemboursement
+        $sql = "UPDATE frais SET      fraStatut=:fraStatut,
+                                      fraRemboursement=:fraRemboursement,
                                       fraDateRemboursement=:fraDateRemboursement
 
-            WHERE fraId = :fraId
-                                    ";
+            WHERE fraId = :fraId";
         $req=$this->db->prepare($sql);
         $req->bindValue(':fraId',$frais->getFraId(),PDO::PARAM_INT);
         $req->bindValue(':fraStatut',$frais->getFraStatut(),PDO::PARAM_STR);
-        $req->bindValue(':fraRemboursement',$frais->getFraRemboursement(),PDO::PARAM_STR);
+        $req->bindValue(':fraRemboursement',$frais->getFraRemboursement(),PDO::PARAM_INT);
         $req->bindValue(':fraDateRemboursement',$frais->getFraDateRemboursement(),PDO::PARAM_STR);
 
         $req->execute();

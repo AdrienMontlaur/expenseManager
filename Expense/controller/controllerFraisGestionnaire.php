@@ -69,12 +69,14 @@ if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"
 }
 if (isset($_GET['radio'])){
 
+    $fraisTraite=$manageFrais->read($_GET['radio']);
+
     $recapitulatif[]=[
-    'Commercial' => $manageSalarie->read($manageFrais->read($_GET['radio'])->getSalId())->getSalNom()." ".$manageSalarie->read($manageFrais->read($_GET['radio'])->getSalId())->getSalPrenom(),
-    'Date du frais' => $manageFrais->read($_GET['radio'])->getFraDate(),           
-    'Type de frais' => $manageFrais->read($_GET['radio'])->getFraType(),
-    'Entreprise du client' => $manageFrais->read($_GET['radio'])->getFraEntSiret(),
-    'Nom du client' => $manageClient->read($manageFrais->read($_GET['radio'])->getCliId())->getCliNom()
+    'Commercial' => $manageSalarie->read($fraisTraite->getSalId())->getSalNom()." ".$manageSalarie->read($manageFrais->read($_GET['radio'])->getSalId())->getSalPrenom(),
+    'Date du frais' => $fraisTraite->getFraDate(),           
+    'Type de frais' => $fraisTraite->getFraType(),
+    'Entreprise du client' => $fraisTraite->getFraEntSiret(),
+    'Nom du client' => $manageClient->read($fraisTraite->getCliId())->getCliNom()
     ];
 
     $justificatifs=$manageJustificatif->readAll();
@@ -87,7 +89,6 @@ if (isset($_GET['radio'])){
             ];
         }
     }
-    var_dump($jusId);
     $jusIdForm=new Formulaire('','POST');
     $jusIdForm->select('jusId',$jusId,'',"Selectionner un justificatif");
     $jusIdForm->submit('envoyer','envoyer');
@@ -105,9 +106,20 @@ if (isset($_GET['radio'])){
     echo ("<h3>Montant demandé :</h3>".$manageFrais->read($_GET['radio'])->getFraRemboursementDemande()."€");
     $rembourementForm->label('dateRemboursement','Date du traitement');
     $rembourementForm->input('date','dateRemboursement','',date("Y-m-d"));
-    $rembourementForm->submit('envoyer','envoyer');
+    $rembourementForm->submit('envoyerRemboursement','envoyer');
     echo $rembourementForm->render();
     echo ('<a href="viewGestionFrais.php">Retourner à la gestion des remboursements</a>');
+
+    //TODO update le frais avec les données de remboursement
+
+    if (isset($_POST['envoyerRemboursement'])){
+
+        $fraisTraite->setFraDateRemboursement($_POST['dateRemboursement']);
+        $fraisTraite->setFraStatut($statut[$_POST['statut']]);
+        $fraisTraite->setFraRemboursement($_POST['remboursement']);
+        $manageFrais->validateManager($fraisTraite);
+        header('Location: viewGestionFrais.php');
+    }
 }
 if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"."view/viewHistoriqueFrais.php"){
     $page="historique";

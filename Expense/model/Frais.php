@@ -95,7 +95,7 @@ class Frais extends Entity
 
     public function getFraRemboursementDemande()
     {
-        return $this->fraRemboursement;
+        return $this->fraRemboursementDemande;
     }
 
     public function setFraRemboursementDemande($fraRemboursementDemande)
