@@ -18,4 +18,3 @@ $content = ob_get_clean(); ?>
 
 <?php require_once('templateGestionnaire.php'); ?>
 
-<a href="viewHistoriqueFrais.php">Voir l'historique des remboursements</a>

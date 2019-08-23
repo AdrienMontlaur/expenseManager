@@ -19,7 +19,7 @@ class Formulaire
         }
     }
 
-    public function select($nom,$tbl,$selected = null,$placeholder){
+    public function select($nom,$tbl,$selected = null,$placeholder=null){
         $this->html.="<select name='$nom'><option disabled selected>$placeholder</option>";
         foreach ($tbl as $index => $element){
             if ($index == $selected){

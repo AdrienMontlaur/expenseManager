@@ -5,11 +5,11 @@
 ob_start(); ?>
 
 <div class="col-xs-4 container">
-    <h1>Gestion des commerciaux</h1>
+    <h1>Gestion des clients</h1>
     
-    <a href="./viewAjoutClient.php">Ajouter un client</a>
-    <a href="./viewModifierClient.php">Modifier un client</a>
-    <a href="./viewSupprimerClient.php">Supprimer un client</a>
+    <a class="button" href="./viewAjoutClient.php">Ajouter un client</a>
+    <a class="button" href="./viewModifierClient.php">Modifier un client</a>
+    <a class="button" href="./viewSupprimerClient.php">Supprimer un client</a>
     <?php require_once('../controller/controllerClient.php'); ?>
 </div>
 

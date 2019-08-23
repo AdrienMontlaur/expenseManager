@@ -15,11 +15,9 @@ $listeLogin=$salManager->readAll();
 foreach ($listeLogin as $value){
     if(isset($_POST['envoiLog'])){
         if (($_POST['login'])==$value->getSalMail()){
-            echo 'coucou';
             if ($_POST['salMdp']==$value->getSalMdp()){
-                //$_SESSION['login']=$_POST['login'];
                 $_SESSION['id']=$value->getSalId();
-                echo 'bonjour M'.$_SESSION['login'];
+                $_SESSION['nom']=$value->getSalNom();
                 header('location:../view/viewGestionCommerciaux.php');
             }
             else{

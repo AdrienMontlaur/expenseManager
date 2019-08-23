@@ -15,7 +15,9 @@ function __autoload($className){
     }
 }
 //path on personal wamp
-$wampPath="http://localhost/expense/expenseManager/Expense/";
+$arborescence="/expense/expenseManager/Expense/";
+$wampPath="http://localhost".$arborescence;
+
 
 function afficheTableau($data){
     // Ouverture du tableau html et entete

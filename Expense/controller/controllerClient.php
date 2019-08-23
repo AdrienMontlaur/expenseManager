@@ -3,7 +3,6 @@
 //TODO modif et supp
 
 //ecriture des controleurs
-session_start();
 require_once('../functions.php');
 
 $manageEntreprises=new EntrepriseManager();
@@ -93,7 +92,7 @@ if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"
     $entreprisesNom=getTableEntreprise($entreprises);
 
     $formAjoutClient= new Formulaire('','POST');
-    $formAjoutClient->select('entSiret',$entreprisesNom);
+    $formAjoutClient->select('entSiret',$entreprisesNom,'','Selectionner une entreprise');
     echo "Si l'entreprise n'est pas connue:";
     echo '<a href="viewAjoutEntreprise.php">Ajouter une entreprise</a>';
     $formAjoutClient->input('text','cliNom','Nom du contact chez le client');
@@ -120,7 +119,6 @@ if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"
         $manageClient->create($client);
         var_dump($client);
     }
-    echo $_SESSION['id'];
 }
 
 

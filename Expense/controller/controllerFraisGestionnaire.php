@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 require_once('../functions.php');
 
 $manageFrais=new FraisManager();
@@ -65,7 +64,8 @@ if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"
 
     echo ('<form method="GET" action"">');
     echo (afficheTableau($tableauObjetFraisAdapt));
-    echo ('<input type="submit" name="envoyer" value="Traiter le frais sélectionné"></form>');
+    echo ('<input class="submit" type="submit" name="envoyer" value="Traiter le frais sélectionné"></form>');
+    echo'<a class="button" href="viewHistoriqueFrais.php">Voir l\'historique des remboursements</a>';
 }
 if (isset($_GET['radio'])){
 
@@ -108,9 +108,7 @@ if (isset($_GET['radio'])){
     $rembourementForm->input('date','dateRemboursement','',date("Y-m-d"));
     $rembourementForm->submit('envoyerRemboursement','envoyer');
     echo $rembourementForm->render();
-    echo ('<a href="viewGestionFrais.php">Retourner à la gestion des remboursements</a>');
-
-    //TODO update le frais avec les données de remboursement
+ 
 
     if (isset($_POST['envoyerRemboursement'])){
 
@@ -125,6 +123,7 @@ if ($url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']==="$wampPath"
     $page="historique";
     $tableauObjetFraisAdapt=adaptFraisToArray($frais,$page);
     echo (afficheTableau($tableauObjetFraisAdapt));
+    echo'<a class="button" href="viewGestionFrais.php">Retourner à la gestion des remboursements</a>';
 }
 
 

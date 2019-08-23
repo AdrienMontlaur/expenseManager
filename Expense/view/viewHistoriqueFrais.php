@@ -14,7 +14,4 @@ ob_start(); ?>
 //native function affect the content to the buffer and clean it
 $content = ob_get_clean(); ?>
 
-
-
 <?php require_once('templateGestionnaire.php'); ?>
-<a href="viewGestionFrais.php">Retourner à la gestion des remboursements</a>
